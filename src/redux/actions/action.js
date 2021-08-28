@@ -1,7 +1,7 @@
 import { EDIT_LOGIN_INPUT_VALUE, EDIT_REGISTER_INPUT_VALUE, SET_ACTIVE_DAY, SUBMIT_LOGIN, SUBMIT_REGISTER, EDIT_TODOLIST_INPUT_VALUE, ADD_NEW_TODO, GET_TODOS, EDIT_TODO, EDIT_TODO_INPUT_VALUE, SET_EDITED_TODO, DELETE_TODO } from "../types";
 import { logInAction } from "./appActions";
 
-const URL = "https://git.heroku.com/hakaton1234asd.git";
+const URL = "http://70e8-92-245-116-7.ngrok.io";
 
 export function editLoginInputValueAction(name, value){
   return { type: EDIT_LOGIN_INPUT_VALUE, payload: {name, value} }
@@ -25,16 +25,16 @@ export function submitLoginAction(username, password){
         dispatch({ type: SUBMIT_LOGIN, payload: error });
         return;
       }
-      // await fetch(`${URL}/rest-auth/login`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify({
-      //     username,
-      //     password,
-      //   })
-      // });
+      await fetch(`${URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        })
+      });
       dispatch(logInAction(username));
     } catch {
       error = "Такой пользователь не найден";
@@ -106,7 +106,7 @@ export function setActiveDayAction(day){
 }
 export function getTodosAction(date){
   return async dispatch => {
-    const response = await fetch(`${URL}/todos`);
+    const response = await fetch(`${URL}/api/v1/tasks`);
     const data = response.json();
     dispatch({ type: GET_TODOS, payload: data.filter(item => item.date === date) })
   }

@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { logOutAction } from "../../../redux/actions/appActions";
 import { gap } from "../../../styles/mixins";
 
 const HeaderElement = styled.header`
@@ -33,17 +35,29 @@ const Item = styled.div`
   }
 `;
 
-function Header () {
+function Header ({isAuth, logout}) {
   return(
     <HeaderElement>
       <HeaderContainer className="container">
         <Logo><Link to="/">Заметки студента</Link></Logo>
         <Menu>
-          <Item><Link to="/"></Link></Item>
+          {
+            isAuth
+            ? <Item><button onClick={logout}>Выйти</button></Item>
+            : ""
+          }
         </Menu>
       </HeaderContainer>
     </HeaderElement>
   );
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  isAuth: state.app.user.isAuth
+});
+
+const mapDispatchToProps = {
+  logout: logOutAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

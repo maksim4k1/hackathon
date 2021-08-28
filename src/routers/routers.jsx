@@ -1,11 +1,8 @@
 import Login from "../pages/Login";
-import Error404 from "../pages/errors/404";
 import Register from "../pages/Register";
 import TodoList from "../pages/TodoList";
 
-const generalRouters = [
-  {path: "/error/404", component: Error404, exact: true},
-]
+const generalRouters = []
 
 export const localReducers = [
   {path: "/", component: TodoList, exact: true},

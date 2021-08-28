@@ -15,7 +15,7 @@ function AppReducers ({isAuth}) {
           return <Route key={index} path={path} component={component} exact={exact} />
         })
       }
-      <Redirect to="/error/404" />
+      <Redirect to="/" />
     </Switch>
   );
 }
