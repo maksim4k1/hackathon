@@ -5,8 +5,8 @@ const initialLogin = {
   formData: [
     {name: "username", value: ""},
     {name: "name", value: ""},
-    {name: "password", value: ""},
-    {name: "confirm_password", value: ""},
+    {name: "password", type: "password", value: ""},
+    {name: "confirm_password", type: "password", value: ""},
   ],
   error: ""
 }

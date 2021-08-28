@@ -21,7 +21,8 @@ function addTodoReducer(state=initialAddTodo, {type, payload}){
     case CLOSE_ADD_TODO_MODAL: {
       return {
         ...state,
-        openModal: false
+        openModal: false,
+        error: ""
       };
     }
     case EDIT_TODOLIST_INPUT_VALUE: {

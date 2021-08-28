@@ -4,7 +4,7 @@ import { EDIT_LOGIN_INPUT_VALUE, SUBMIT_LOGIN } from "../types";
 const initialLogin = {
   formData: [
     {name: "username", value: ""},
-    {name: "password", value: ""},
+    {name: "password", type: "password", value: ""},
   ],
   error: ""
 }

@@ -26,7 +26,7 @@ function TodoListForm ({formData, error, editInputValue, submitForm, username, s
   
   return(
     <div>
-      <Form title="Создать новый Todo" inputs={formData} inputHandler={inputHandler} formHandler={formHandler}/>
+      <Form title={`Создать новый Todo`} date={selectedDate} inputs={formData} inputHandler={inputHandler} formHandler={formHandler}/>
       <Error>{error}</Error>
     </div>
   );

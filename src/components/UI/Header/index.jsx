@@ -37,7 +37,7 @@ function Header () {
   return(
     <HeaderElement>
       <HeaderContainer className="container">
-        <Logo><Link to="/">Список дел</Link></Logo>
+        <Logo><Link to="/">Заметки студента</Link></Logo>
         <Menu>
           <Item><Link to="/"></Link></Item>
         </Menu>

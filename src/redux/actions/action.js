@@ -1,7 +1,7 @@
-import { EDIT_LOGIN_INPUT_VALUE, EDIT_REGISTER_INPUT_VALUE, SET_ACTIVE_DAY, SUBMIT_LOGIN, SUBMIT_REGISTER, EDIT_TODOLIST_INPUT_VALUE, ADD_NEW_TODO } from "../types";
+import { EDIT_LOGIN_INPUT_VALUE, EDIT_REGISTER_INPUT_VALUE, SET_ACTIVE_DAY, SUBMIT_LOGIN, SUBMIT_REGISTER, EDIT_TODOLIST_INPUT_VALUE, ADD_NEW_TODO, GET_TODOS, EDIT_TODO, EDIT_TODO_INPUT_VALUE, SET_EDITED_TODO, DELETE_TODO } from "../types";
 import { logInAction } from "./appActions";
 
-const URL = "http://localhost";
+const URL = "https://git.heroku.com/hakaton1234asd.git";
 
 export function editLoginInputValueAction(name, value){
   return { type: EDIT_LOGIN_INPUT_VALUE, payload: {name, value} }
@@ -11,6 +11,9 @@ export function editRegisterInputValueAction(name, value){
 }
 export function editTodoListInputValueAction(name, value){
   return { type: EDIT_TODOLIST_INPUT_VALUE, payload: {name, value} }
+}
+export function editTodoInputValueAction(name, value){
+  return { type: EDIT_TODO_INPUT_VALUE, payload: {name, value} }
 }
 export function submitLoginAction(username, password){
   return async dispatch => {
@@ -22,7 +25,7 @@ export function submitLoginAction(username, password){
         dispatch({ type: SUBMIT_LOGIN, payload: error });
         return;
       }
-      // await fetch(`${URL}/login`, {
+      // await fetch(`${URL}/rest-auth/login`, {
       //   method: "POST",
       //   headers: {
       //     "Content-Type": "application/json"
@@ -100,4 +103,49 @@ export function submitTodoListAction(title, body, username, date){
 }
 export function setActiveDayAction(day){
   return { type: SET_ACTIVE_DAY, payload: day }
+}
+export function getTodosAction(date){
+  return async dispatch => {
+    const response = await fetch(`${URL}/todos`);
+    const data = response.json();
+    dispatch({ type: GET_TODOS, payload: data.filter(item => item.date === date) })
+  }
+}
+export function editTodoAction(title, body, id){
+  return async dispatch => {
+    let error;
+
+    try{
+      if(!title || !body){
+        error = "Заполните все поля"
+        dispatch({ type: EDIT_TODO, payload: error });
+        return;
+      }
+      await fetch(`${URL}/edit/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title,
+          body,
+        })
+      });
+    } catch{
+      error = "Что-то пошло не так..."
+    }
+
+    dispatch({ type: EDIT_TODO, payload: error })
+  }
+}
+export function setEditedTodoAction(id){
+  return{ type: SET_EDITED_TODO, payload: id };
+}
+export function deleteTodoAction(id){
+  return async dispatch => {
+    await fetch(`${URL}/delete/${id}`, {
+      method: "DELETE",
+    });
+    dispatch({ type: DELETE_TODO });
+  }
 }

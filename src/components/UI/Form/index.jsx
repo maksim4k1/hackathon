@@ -14,13 +14,13 @@ const Title = styled.h3`
   text-align: center;
 `;
 
-function Form ({inputs, inputHandler, formHandler, title}) {
+function Form ({inputs, inputHandler, formHandler, title, date}) {
   return(
     <FormElement onSubmit={formHandler}>
-      <Title>{title}</Title>
+      <Title>{title}{date ? ` на ${date}` : ""}</Title>
       {
         inputs.map((input, index) => {
-          return <Input key={index} name={input.name} placeholder={input.placeholder} value={input.value} onChange={inputHandler}/>
+          return <Input key={index} type={input.type ? input.type : "text"} name={input.name} placeholder={input.placeholder} value={input.value} onChange={inputHandler}/>
         })
       }
       <Button type="submit">{title}</Button>

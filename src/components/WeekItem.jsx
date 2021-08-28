@@ -5,8 +5,8 @@ import { setActiveDayAction } from "../redux/actions/action";
 import { gap } from "../styles/mixins";
 
 const Item = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   display: flex;
   flex-flow: column;
   ${gap("3px")}
