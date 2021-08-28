@@ -44,4 +44,8 @@ body{
 :root{
   --main-white: #FFFFFF;
   --main-black: #000000;
+  --main-grey: #D6D6D6;
+  --main-blue: #3C3E52;
+  --main-red: #FF0000;
+  --main-green: #5AA709;
 }
