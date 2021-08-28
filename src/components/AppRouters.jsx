@@ -21,7 +21,7 @@ function AppReducers ({isAuth}) {
 }
 
 const mapStateToProps = state => ({
-  isAuth: state.app.isAuth
+  isAuth: state.app.user.isAuth
 });
 
 export default connect(mapStateToProps)(AppReducers);
